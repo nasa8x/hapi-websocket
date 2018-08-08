@@ -35,7 +35,7 @@ const server = Hapi.server({
 (async () => {
 
     await server.register([
-        { plugin: require("../dist") },
+        { plugin: require("hapi-websocket") },
         { plugin: require("inert") },
     ]);
 

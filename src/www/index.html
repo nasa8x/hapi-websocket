@@ -20,13 +20,18 @@
 
         <script>
             $(function () {
-                var socket = io();
+                var socket = io('http://localhost:8081');
 
                 console.log('socket start...');
 
                 socket.emit('ping-pong', { cmd: 'hello' }, function (res) {
                     // res is the result from the hapi route
                     console.log(res);
+                });
+
+                socket.on('login', function (data) {
+
+                    console.log(data);
                 });
             })
 

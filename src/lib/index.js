@@ -12,6 +12,9 @@ exports.plugin = {
         server = options.label ? server.select(options.label) : server;
 
         var io = Socket(server.listener, options.socket);
+        if (options.adapter) {
+            io.adapter(options.adapter);
+        }
         server.expose('io', io);
 
         // namespaces

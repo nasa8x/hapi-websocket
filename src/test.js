@@ -1,14 +1,16 @@
 var Hapi = require("hapi");
 
 const server = Hapi.server({
-    port: 8080,
+    port: 8081,
     host: 'localhost'
 });
 
 (async () => {
 
     await server.register([
-        { plugin: require("../dist") },
+        {
+            plugin: require("../dist")
+        },
         { plugin: require("inert") },
     ]);
 
@@ -25,7 +27,11 @@ const server = Hapi.server({
             },
             handler: async (request, h) => {
                 console.log(request.payload);
-                var ws = request.websocket;                
+                var ws = request.websocket;
+
+                setTimeout(function () {
+                    ws.io.emit('login', { data: "Login Ok" });
+                }, 5000);
 
                 return new Promise((resolve, reject) => {
                     resolve({ mode: ws.mode, reply: 'pong' });
